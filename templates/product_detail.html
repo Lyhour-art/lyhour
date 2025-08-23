@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-6 mb-3">
+    <div class="card">
+      <div class="product-thumb">
+        <span class="badge badge-top-left">{{ product['category'] }}</span>
+        {% if product['image'].startswith('http') %}
+          <img src="{{ product['image'] }}" alt="{{ product['name'] }}">
+        {% else %}
+          <img src="{{ url_for('static', filename='uploads/' ~ product['image']) }}" alt="{{ product['name'] }}">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <h1>{{ product['name'] }}</h1>
+    <p class="lead">{{ product['description'] }}</p>
+    <h3 class="text-success">${{ '%.2f'|format(product['price']) }}</h3>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-2">← Back</a>
+  </div>
+</div>
+
+<hr>
+<h4>More products</h4>
+<div class="row">
+  {% for p in more_products %}
+  <div class="col-12 col-md-6 col-xl-4 d-flex align-items-stretch mb-4">
+    <div class="card w-100">
+      <div class="product-thumb">
+        <span class="badge badge-top-left">{{ p['category'] }}</span>
+        <a href="{{ url_for('product_detail', product_id=p['id']) }}">
+          {% if p['image'].startswith('http') %}
+            <img src="{{ p['image'] }}" alt="{{ p['name'] }}">
+          {% else %}
+            <img src="{{ url_for('static', filename='uploads/' ~ p['image']) }}" alt="{{ p['name'] }}">
+          {% endif %}
+        </a>
+      </div>
+      <div class="card-body">
+        <h6 class="card-title">{{ p['name'] }}</h6>
+        <p class="card-text">{{ (p['description'][:90] ~ ('…' if p['description']|length > 90 else '')) }}</p>
+        <div class="d-flex justify-content-between">
+          <span class="price">${{ '%.2f'|format(p['price']) }}</span>
+          <a class="btn btn-sm btn-outline-success" href="{{ url_for('product_detail', product_id=p['id']) }}">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="col-12"><div class="alert alert-secondary">No other products yet.</div></div>
+  {% endfor %}
+</div>
+{% endblock %}

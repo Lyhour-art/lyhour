@@ -1,0 +1,32 @@
+
+/* Minimal custom styles on top of Bootstrap 4.6 */
+:root{
+  --accent:#7c5cff;
+  --success:#2cb67d;
+  --danger:#ef476f;
+}
+body{background:#0b0c10;color:#e6e6e6}
+.navbar{background:linear-gradient(90deg, #0f1120,#0c0f1a); border-bottom:1px solid #1b1e27}
+.navbar-brand{font-weight:800;letter-spacing:.08em}
+.card{border-radius:16px;border:1px solid #1b1e27;background:linear-gradient(180deg,#0f1322,#0b0e18);color:#e6e6e6;overflow:hidden}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.35)}
+.card, .btn{transition:all .2s ease}
+.price{font-weight:800}
+.badge-top-left{
+  position:absolute;top:.5rem;left:.5rem;background:#0b74ff;border-radius:12px;padding:.35rem .5rem;font-weight:700
+}
+.product-thumb{position:relative;border-bottom:1px solid #1b1e27}
+.product-thumb img{width:100%;height:auto;display:block}
+a.see-more{color:#7aa7ff}
+.btn-outline-success{border-color:#2cb67d;color:#2cb67d}
+.btn-outline-success:hover{background:#2cb67d;border-color:#2cb67d;color:#0b0c10}
+.footer{color:#9aa3b2;border-top:1px solid #1b1e27;margin-top:2rem;padding:2rem 0}
+small.muted{color:#9aa3b2}
+/* Detail page */
+.lead{color:#cfd6e6}
+/* Admin tables */
+.table thead th{color:#9aa3b2;border-bottom-color:#1b1e27}
+.table{color:#e6e6e6}
+.table tr{border-color:#1b1e27}
+.form-control, .custom-file-input, .custom-select{background:#101425;border:1px solid #1b1e27;color:#e6e6e6}
+.form-control::placeholder{color:#8892a6}

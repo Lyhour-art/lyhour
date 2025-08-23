@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-4">
+  <h1 class="display-4">New Collections</h1>
+  <p class="lead">Clean, responsive cards with category badge, title, description, price and actions.</p>
+</div>
+
+<a id="shop"></a>
+<div class="row">
+  {% for p in products %}
+  <div class="col-12 col-sm-6 col-lg-4 d-flex align-items-stretch mb-4">
+    <div class="card w-100">
+      <div class="product-thumb">
+        <span class="badge badge-top-left">{{ p['category'] }}</span>
+        <a href="{{ url_for('product_detail', product_id=p['id']) }}">
+          {% if p['image'] and (p['image'].startswith('http') or p['image'].startswith('https')) %}
+            <img src="{{ p['image'] }}" alt="{{ p['name'] }}">
+          {% else %}
+            <img src="{{ url_for('static', filename='uploads/' ~ p['image']) }}" alt="{{ p['name'] }}">
+          {% endif %}
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><a href="{{ url_for('product_detail', product_id=p['id']) }}" class="text-white">{{ p['name'] }}</a></h5>
+        <p class="card-text">{{ (p['description'][:120] ~ ('…' if p['description']|length > 120 else '')) }}</p>
+        <p class="mb-2"><a class="see-more" href="{{ url_for('product_detail', product_id=p['id']) }}">see more</a></p>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="price h4 mb-0 text-danger">${{ '%.1f'|format(p['price']) }}</div>
+          <a href="{{ url_for('product_detail', product_id=p['id']) }}" class="btn btn-outline-success">Add to Cart <span class="ml-1">🛒</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="col-12"><div class="alert alert-secondary">No products yet.</div></div>
+  {% endfor %}
+</div>
+{% endblock %}

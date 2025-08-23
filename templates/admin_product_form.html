@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ 'Edit' if product else 'Add' }} product</h1>
+<form method="post" enctype="multipart/form-data">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Name</label>
+      <input class="form-control" type="text" name="name" value="{{ product['name'] if product else '' }}" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Category</label>
+      <input class="form-control" type="text" name="category" value="{{ product['category'] if product else '' }}" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label>Price</label>
+      <input class="form-control" type="number" step="0.01" name="price" value="{{ product['price'] if product else '' }}" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Image URL <small class="text-muted">(preferred)</small></label>
+    <input class="form-control" type="url" name="image_url" value="{{ product['image'] if product else '' }}" placeholder="https://...">
+  </div>
+  <div class="form-group">
+    <label>Or upload image file</label>
+    <input class="form-control-file" type="file" name="image">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" name="description" required rows="5">{{ product['description'] if product else '' }}</textarea>
+  </div>
+  <button class="btn btn-success">{{ 'Save changes' if product else 'Create product' }}</button>
+  <a href="{{ url_for('admin_products') }}" class="btn btn-secondary ml-2">Cancel</a>
+</form>
+{% endblock %}
